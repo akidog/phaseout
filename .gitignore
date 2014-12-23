@@ -1,0 +1,68 @@
+# Bundler
+**/*/.bundle
+*.backup
+*.dump
+*/.bundle
+
+.bundle
+vendor/bundle
+/Gemfile.lock
+
+# Redis
+*.rdb
+
+# Test
+.rspec
+/coverage/
+/spec/reports/
+
+# RVM specific files
+.ruby-gemset
+.ruby-version
+.rvmrc
+
+# Vagrant & Cheff
+*.box
+.vagrant
+chef/cookbooks/**/*
+chef/tmp/**/*
+packages
+
+# OS Trash
+**/*/.DS_Store
+*/.DS_Store
+.DS_Store
+.idea
+.sass-cache
+
+# Debug
+debug/*
+drafts/*
+references/*
+todo/*
+
+# Public
+public/assets
+public/sitemap
+public/sitemap*
+public/uploads
+
+# Log
+log/*
+mkmf.log
+
+# Tmp
+tmp/*
+
+# Doc
+/.yardoc
+/_yardoc/
+/doc/
+/pkg/
+
+
+# Bin
+*.so
+*.o
+*.a
+
