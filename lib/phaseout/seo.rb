@@ -1,12 +1,9 @@
-require 'phaseout/seo_fields'
-require 'phaseout/seo_helper'
-
 module Phaseout
   module SEO
     extend ActiveSupport::Concern
 
     def seo_tags
-      @_seo_tags ||= ''
+      @_seo_tags || ''
     end
 
     def seo_tags=(value)
