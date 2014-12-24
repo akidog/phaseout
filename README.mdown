@@ -26,7 +26,6 @@ Config Redis storage at some initializer:
 
 ```ruby
 Phaseout.redis = Redis.new redis_config
-# More configs on future...
 ```
 
 Maybe it will be something like that on controllers:
@@ -50,6 +49,10 @@ On routes, add something like that:
 ```ruby
 mount Phaseout::Engine => 'seo'
 ```
+
+And if something doesn't work, remember what I said: "UNSTABLE, DON'T USE IT YET!".
+
+And we will be glad to hear opinions and even more happier to receive pull requests!
 
 ## Contributing
 
