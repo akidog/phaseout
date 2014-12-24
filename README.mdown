@@ -1,6 +1,8 @@
 # Phaseout
 
-TODO: Write a gem description
+## Unstable, don't use it yet!
+
+We are drafting our API, so no tests where written yet, and everything can break or can be broken on this repository.
 
 ## Installation
 
@@ -20,11 +22,38 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Config Redis storage at some initializer:
+
+```ruby
+Phaseout.redis = Redis.new redis_config
+# More configs on future...
+```
+
+Maybe it will be something like that on controllers:
+
+```ruby
+seo_tags_for :show, key: 'product/:@product.slug', as: 'Product @product.humanized_full_name' do |seo|
+  seo.meta_keywords{ |c| c.some_method_from_controller }
+  seo.og_url "raw_og_url"
+  seo.any_helper "with it's", "arguments"
+end
+```
+
+On views, just add this:
+
+```html_ruby
+<%= seo_tags %>
+```
+
+On routes, add something like that:
+
+```ruby
+mount Phaseout::Engine => 'seo'
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/phaseout/fork )
+1. Fork it ( https://github.com/akidog/phaseout/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

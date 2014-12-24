@@ -1,5 +1,21 @@
+require 'redis'
+require 'redis-namespace'
+
 require 'phaseout/version'
+require 'phaseout/engine'
+require 'phaseout/seo'
+require 'phaseout/handler'
 
 module Phaseout
-  # Your code goes here...
+  def self.config_redis(connection, namespace = :phaseout)
+    @redis = Redis::Namespace.new namespace, redis: connection
+  end
+
+  def self.redis
+    @redis ||= config_redis(Redis.new)
+  end
+end
+
+ActiveSupport.on_load(:action_view) do
+  include Phaseout::SEOHelper
 end
