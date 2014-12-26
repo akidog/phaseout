@@ -22,6 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis'
   spec.add_dependency 'redis-namespace'
 
+  spec.add_dependency 'eco'
+  spec.add_dependency 'coffee-script'
+
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'bundler'
 end
