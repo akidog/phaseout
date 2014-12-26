@@ -4,7 +4,7 @@ module Phaseout
     attr_accessor :values, :default
 
     def initialize(key, human_name, values = Hash.new, &block)
-      @key, @human_name, @values = key, human_name, values
+      @key, @human_name, @values = I18n.transliterate(key).gsub(/\s+/, '_').underscore, human_name, values
       yield(self) if block_given?
     end
 
@@ -12,6 +12,28 @@ module Phaseout
       evaluated_values(controller).map do |helper, argument|
         controller.view_context.send helper, *argument
       end.join.html_safe
+    end
+
+    def action_key
+      @action_key ||= @key.match('seo_key:').post_match.match(':').pre_match
+    end
+
+    def action
+      @action ||= ::Phaseout::SEOAction.new action_key
+    end
+
+    def id
+      @key.match(/\#.+\:/).post_match.gsub(/\s+/, '_').underscore
+    end
+
+    def to_json
+      {
+        id:         id,
+        key:        @key,
+        values:     @values,
+        name:       @human_name,
+        action_key: action_key
+      }.to_json
     end
 
     def dump
@@ -47,7 +69,7 @@ module Phaseout
     end
 
     def inspect
-      "#<Phaseout::SEO #{ @key.match('seo_key:').post_match.match('/').pre_match } #{@human_name}>"
+      "#<Phaseout::SEO #{action_key} #{@human_name}>"
     end
     alias :to_s :inspect
 
@@ -72,29 +94,17 @@ module Phaseout
       dump ? Marshal.load(dump) : nil
     end
 
-    def self.actions(&block)
-      pattern = "#{Phaseout.redis.namespace}:action:*"
-      cursor, values = Phaseout.redis.scan 0, match: pattern
-      while cursor != 0
-        cursor = cursor.to_i
-        values.each do |value|
-          yield value.match(/#{ Phaseout.redis.namespace }\:action\:/).post_match
-        end
-        cursor, values = Phaseout.redis.scan cursor, match: pattern
-        cursor = cursor.to_i
+    def self.all(action_key, &block)
+      unless block_given?
+        values = []
+        self.all(action_key){ |field| values << field }
+        return values
+      end
+
+      class_index_key = "#{Phaseout.redis.namespace}:action:#{action_key}"
+      Phaseout.redis.sscan_each(class_index_key) do |value|
+        yield self.find value.match('seo_key:').post_match
       end
     end
-
-    def self.fields_for(action_signature, &block)
-      class_index_key = "#{Phaseout.redis.namespace}:action:#{action_signature}"
-      cursor, keys = Phaseout.redis.sscan class_index_key, 0
-      while cursor != 0
-        cursor = cursor.to_i
-        keys.each{ |value| yield self.find(value.match('seo_key:').post_match) }
-        cursor, keys = Phaseout.redis.sscan class_index_key, cursor
-        cursor = cursor.to_i
-      end
-    end
-
   end
 end

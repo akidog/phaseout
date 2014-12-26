@@ -3,6 +3,7 @@ require 'redis-namespace'
 
 require 'phaseout/version'
 require 'phaseout/engine'
+require 'phaseout/seo_action'
 require 'phaseout/seo_fields'
 require 'phaseout/seo_helper'
 require 'phaseout/seo'

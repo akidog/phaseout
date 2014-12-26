@@ -9,12 +9,12 @@ module Phaseout
 
     def call(&action_block)
       if seo_fields
-        @controller.seo_tags = seo_fields.to_html(@controller)
+        @controller.seo_tags = seo_fields.to_html @controller
       else
-        @controller.seo_tags = @default.to_html(@controller)
-        set_blank_field if @blank_field && @editable
+        @controller.seo_tags = @default.to_html @controller
       end
       action_block.call
+      set_blank_field if @controller.status == 200 && @blank_field && @editable
       true
     end
 
@@ -23,7 +23,7 @@ module Phaseout
     end
 
     def key
-      @key ||= [ 'seo_key:', @controller.class.name, '#', @action, '/', eval_pattern(@key_pattern) ].join
+      @key ||= I18n.transliterate( [ 'seo_key:', @controller.class.name, '#', @action, ':', eval_pattern(@key_pattern) ].join.gsub(/\s+/, '_').underscore )
     end
 
     def seo_fields
@@ -40,7 +40,7 @@ module Phaseout
     end
 
     def class_index_key
-      ['action:', @controller.class.name, '#', @action].join
+      ['action:', @controller.class.name, '#', @action].join.gsub(/\s+/, '_').underscore
     end
 
     protected

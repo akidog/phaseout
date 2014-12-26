@@ -1,0 +1,8 @@
+<li id="action_key_<%- @id %>" class="seo_action_key_item">
+  <a href="javascript:void(0)" data-action-key="<%- @id %>"><%- @name %></a>
+  <ul class="action_key_fields">
+    <% for key, field of @fields: %>
+      <li><%- key %>: <%- field %></li>
+    <% end %>
+  </ul>
+</li>

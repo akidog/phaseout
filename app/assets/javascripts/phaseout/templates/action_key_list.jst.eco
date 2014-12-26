@@ -1,0 +1,3 @@
+<% for index, action_key of @action_keys : %>
+  <%- JST['phaseout/templates/action_key_item'](action_key) %>
+<% end %>

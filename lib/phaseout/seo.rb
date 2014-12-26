@@ -15,8 +15,15 @@ module Phaseout
     end
 
     module ClassMethods
-      def seo_tags_for(action, as: action, key: action, editable: true, &block)
+      def seo_group_name
+        @_seo_group_name ||= Hash.new
+      end
+
+      def seo_tags_for(action, as: action, key: action, editable: true, grouped_as: nil, &block)
+        seo_action = Phaseout::SEOAction.new self.name, action
+        seo_group_name[seo_action.key] = grouped_as || seo_action.key
         around_block = lambda do |controller, action_block|
+          return action_block.call unless request.format.html?
           Phaseout::Handler.new(controller, action, as, key, editable, &block).call &action_block
         end
         around_action around_block, only: action
