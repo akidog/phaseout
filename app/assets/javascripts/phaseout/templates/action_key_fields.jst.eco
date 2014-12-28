@@ -1,0 +1,3 @@
+<% for key, field of @fields: %>
+  <li><%- key %>: <%- field %></li>
+<% end %>

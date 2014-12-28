@@ -2,6 +2,7 @@ module Phaseout
   class SEOFields
     attr_reader :key, :human_name
     attr_accessor :values, :default
+    alias :fields :values
 
     def initialize(key, human_name, values = Hash.new, &block)
       @key, @human_name, @values = I18n.transliterate(key).gsub(/\s+/, '_').underscore, human_name, values
@@ -29,9 +30,10 @@ module Phaseout
     def to_json
       {
         id:         id,
-        key:        @key,
-        values:     @values,
+        key:        @key.match('seo_key:').post_match,
+        fields:     @values,
         name:       @human_name,
+        action_id:  action_key.gsub('#', '_').underscore,
         action_key: action_key
       }.to_json
     end
@@ -77,7 +79,7 @@ module Phaseout
       if block_given?
         @values[method.to_sym] = block
       else
-        @values[method.to_sym] = args
+        @values[method.to_sym] = args unless args.empty?
       end
     end
 

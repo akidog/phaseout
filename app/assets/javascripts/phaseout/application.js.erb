@@ -1,4 +1,5 @@
 //= require       jquery
+//= require       jquery_ujs
 //= require       underscore
 //= require_tree ./templates
 
@@ -8,8 +9,30 @@ function seo_action_keys_path(key){
   return path.replace( 'PHASEOUT_ACTION_KEY', key.replace('#', '\%23') );
 }
 
+function seo_fields_update_path(key){
+  var path = "<%= Phaseout::Engine.routes.url_helpers.seo_fields_update_path('PHASEOUT_ACTION_KEY') %>";
+  return path.replace( 'PHASEOUT_ACTION_KEY', key.replace('#', '\%23') );
+}
+
 function seo_action_list_path(){
   return "<%= Phaseout::Engine.routes.url_helpers.seo_action_list_path %>";
+}
+
+function click_on_action_key_handler(action_key){
+  var action_key_html_id = action_key['action_id']+'_'+action_key['id'];
+  var fields_form        = $('#'+action_key_html_id+' .action_key_fields');
+
+  $('#'+action_key_html_id+' .seo_action_key_link').click((function(){
+    return function(){
+      fields_form.toggle();
+    };
+  })());
+
+  fields_form[0].action_key = action_key;
+  fields_form.on('ajax:success', function(xhr, response_data, status){
+    fields_form[0].action_key = response_data;
+    alert(response_data['status']);
+  });
 }
 
 function load_action_keys(key, html_id){
@@ -17,9 +40,10 @@ function load_action_keys(key, html_id){
     url:      seo_action_keys_path(key),
     type:     'GET',
     dataType: 'json',
-    success: function(json){
-      var action_keys = _.sortBy(json, function(obj){ return obj['name']; });
+    success: function(data){
+      var action_keys = _.sortBy(data, function(obj){ return obj['name']; });
       $('#'+html_id+' ul').append(JST['phaseout/templates/action_key_list']({ action_keys: action_keys }));
+      for( var index in action_keys ){ click_on_action_key_handler(action_keys[index]); }
     }
   });
 }
@@ -36,7 +60,7 @@ function click_on_action_handler(_action){
         load_action_keys(action['key'], action['id']);
       }
     };
-  })(_action));
+  })());
 }
 
 function load_actions(){
@@ -44,8 +68,8 @@ function load_actions(){
     url:      seo_action_list_path(),
     type:     'GET',
     dataType: 'json',
-    success: function(json){
-      var actions = _.sortBy(json, function(obj){ return obj['name']; });
+    success: function(data){
+      var actions = _.sortBy(data, function(obj){ return obj['name']; });
       $('.seo_action_list').append(JST['phaseout/templates/action_list']({ actions: actions }));
       for( var index in actions ){ click_on_action_handler(actions[index]); }
     }

@@ -1,8 +1,9 @@
-<li id="action_key_<%- @id %>" class="seo_action_key_item">
-  <a href="javascript:void(0)" data-action-key="<%- @id %>"><%- @name %></a>
-  <ul class="action_key_fields">
-    <% for key, field of @fields: %>
-      <li><%- key %>: <%- field %></li>
-    <% end %>
-  </ul>
+<li id="<%- @action_id %>_<%- @id %>" class="seo_action_key_item">
+  <a href="javascript:void(0)" class="seo_action_key_link"><%- @name %></a>
+  <form action="<%- seo_fields_update_path @key %>" class="action_key_fields" style="display: none" data-remote="true">
+    <ul class="seo_form_fields_list">
+      <%- JST['phaseout/templates/action_key_fields'](fields :@fields) %>
+    </ul>
+    <input type="submit" value="Editar"/>
+  </form>
 </li>
