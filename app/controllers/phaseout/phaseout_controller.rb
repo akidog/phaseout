@@ -1,6 +1,10 @@
 module Phaseout
   class PhaseoutController < ::Phaseout::ApplicationController
 
+    def update
+      render json: { status: :ok }.to_json
+    end
+
     def actions
       streamed_json_response do |stream|
         ::Phaseout::SEOAction.all do |seo_action|
