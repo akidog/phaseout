@@ -19,7 +19,7 @@ module Phaseout
         @_seo_group_name ||= Hash.new
       end
 
-      def seo_tags_for(action, as: action, key: action, editable: true, grouped_as: nil, &block)
+      def seo_tags_for(action, as: action, key: as, editable: true, grouped_as: nil, &block)
         seo_action = Phaseout::SEOAction.new self.name, action
         seo_group_name[seo_action.key] = grouped_as || seo_action.key
         around_block = lambda do |controller, action_block|
