@@ -3,7 +3,7 @@
 //= require       underscore
 //= require_tree ./templates
 
-// TODO: This route method works, but it's ugly!
+// TODO: These route methods works, but they're ugly!
 function seo_action_keys_path(key){
   var path = "<%= Phaseout::Engine.routes.url_helpers.seo_action_keys_path('PHASEOUT_ACTION_KEY') %>";
   return path.replace( 'PHASEOUT_ACTION_KEY', key.replace('#', '\%23') );
@@ -20,11 +20,13 @@ function seo_action_list_path(){
 
 function click_on_action_key_handler(action_key){
   var action_key_html_id = action_key['action_id']+'_'+action_key['id'];
+  var item               = $('#'+action_key_html_id);
   var fields_form        = $('#'+action_key_html_id+' .action_key_fields');
 
   $('#'+action_key_html_id+' .seo_action_key_link').click((function(){
     return function(){
       fields_form.toggle();
+      item.toggleClass('opened');
     };
   })());
 
@@ -50,12 +52,18 @@ function load_action_keys(key, html_id){
 
 function click_on_action_handler(_action){
   var action = _action;
+  var header = $('#'+action['id']+'.seo_action_item');
   var list   = $('#'+action['id']+' ul.action_key_list');
   $('#'+_action['id']+' .seo_action_item_link').click((function(){
     return function(){
       if( list.fecthedData ){
         list.toggle();
+        list.toggleClass('opened');
+        header.toggleClass('opened');
       } else {
+        header.addClass('opened');
+        list.addClass('opened');
+        list.show();
         list.fecthedData = true;
         load_action_keys(action['key'], action['id']);
       }
