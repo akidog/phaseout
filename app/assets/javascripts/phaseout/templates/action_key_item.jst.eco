@@ -6,12 +6,14 @@
         <%- JST['phaseout/templates/action_key_field'](action_key: this, key: key, field: field) %>
       <% end %>
     </ul>
-    <select>
-      <% for field_method, humanized_field of PhaseoutFields : %>
-        <option value="<%- field_method %>"><%- humanized_field %></option>
-      <% end %>
-    </select>
-    <input id="<%- @action_id %>_<%- @id %>_button" type="button" value="Add Field"/>
-    <input type="submit" value="Edit"/>
+    <div class="seo_fields_buttons">
+      <select class="seo_fields_to_add">
+        <% for field_method, humanized_field of PhaseoutFields : %>
+          <option value="<%- field_method %>"><%- humanized_field %></option>
+        <% end %>
+      </select>
+      <input id="<%- @action_id %>_<%- @id %>_button" type="button" value="Add Field" class="seo_fields_add_button"/>
+      <input type="submit" value="Update" class="submit_seo_fields"/>
+    </div>
   </form>
 </li>
