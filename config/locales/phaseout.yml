@@ -1,5 +1,11 @@
 pt-BR:
-  phaseout:
+  seo:
+    common:
+      add:           'Adicionar'
+      update:        'Atualizar'
+      delete:        'Apagar'
+      add_prompt:    'Adicione um campo customizado:'
+      already_added: 'Campo já adicionado!'
     fields:
       page_title:       'Título da Página'
       meta_description: 'Meta Descrição'
@@ -10,7 +16,13 @@ pt-BR:
       og_description:   'Facebook Descrição'
       other:            'Outro'
 en:
-  phaseout:
+  seo:
+    common:
+      add:           'Add'
+      update:        'Update'
+      delete:        'Delete'
+      add_prompt:    'Add a custom field:'
+      already_added: 'Field already added!'
     fields:
       page_title:       'Page Title'
       meta_description: 'Meta Description'
