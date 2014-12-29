@@ -5,6 +5,7 @@ pt-BR:
       update:        'Atualizar'
       delete:        'Apagar'
       add_prompt:    'Adicione um campo customizado:'
+      are_you_sure:  'Tem certeza?'
       already_added: 'Campo já adicionado!'
     fields:
       page_title:       'Título da Página'
@@ -22,6 +23,7 @@ en:
       update:        'Update'
       delete:        'Delete'
       add_prompt:    'Add a custom field:'
+      are_you_sure:  'Are you sure?'
       already_added: 'Field already added!'
     fields:
       page_title:       'Page Title'

@@ -1,4 +1,9 @@
-<li>
-  <label for="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>"><%- PhaseoutFields[@key] || @key %></label>
-  <textarea id="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>" name="seo_field[<%- @key %>]"><%- @field %></textarea>
+<li id="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>" class="seo_field_item">
+  <label for="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>_textarea">
+    <%- PhaseoutFields[@key] || @key %>
+  </label>
+  <textarea id="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>_textarea" name="seo_field[<%- @key %>]"><%- @field %></textarea>
+  <a href="javascript:void(0)" class="delete_field" data-delete-field="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>" data-confirm="<%- PhaseoutTranslations.common.are_you_sure %>">
+    <%- PhaseoutTranslations.common.delete %>
+  </a>
 </li>

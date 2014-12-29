@@ -55,7 +55,7 @@ h1 {
 .seo_action_key_item {
   margin: 5px 35px;
 
-  a {
+  .seo_action_key_link {
     padding:         3px 5px;
     display:         block;
     color:           #330000;
@@ -70,7 +70,7 @@ h1 {
   &.opened {
     background: #FFFFAA;
 
-    a {
+    .seo_action_key_link {
       color:      #331100;
       background: #FF9933;
 
@@ -108,5 +108,14 @@ h1 {
   textarea {
     width:  100%;
     height: 80px;
+  }
+
+  .seo_field_item {
+    position: relative;
+    .delete_field {
+      top:      0px;
+      right:    0px;
+      position: absolute;
+    }
   }
 }

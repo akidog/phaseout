@@ -36,11 +36,11 @@ function click_on_action_key_handler(action_key){
   fields_form[0].action_key = action_key;
   fields_form.on('ajax:success', function(xhr, response_data, status){
     fields_form[0].action_key = response_data;
-    alert(response_data['status']);
   });
 
   $('#'+action_key_html_id+'_button').click(function(){
     var field_key = $('#'+action_key_html_id+' option:selected').attr('value');
+
     if( field_key == 'other' ){
       field_key = window.prompt(PhaseoutTranslations.common.add_prompt);
       if( field_key == null ){ return null; }
@@ -103,6 +103,10 @@ function load_actions(){
       $('.seo_action_list').append(JST['phaseout/templates/action_list']({ actions: actions }));
       for( var index in actions ){ click_on_action_handler(actions[index]); }
     }
+  });
+
+  $(document).delegate('a[data-delete-field]', 'click', function(){
+    $('#' + $(this).data('delete-field')).remove();
   });
 }
 

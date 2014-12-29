@@ -1,4 +1,8 @@
 <li id="<%- @id %>" class="seo_action_item">
-  <h3><a href="javascript:void(0)" data-action-key="<%- @key %>" class="seo_action_item_link"><%- @name %></a></h3>
+  <h3>
+    <a href="javascript:void(0)" data-action-key="<%- @key %>" class="seo_action_item_link">
+      <%- @name %>
+    </a>
+  </h3>
   <ul class="action_key_list" style="display: none"/>
 </li>
