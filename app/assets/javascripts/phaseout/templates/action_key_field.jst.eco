@@ -1,0 +1,2 @@
+<label for="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>"><%- PhaseoutFields[@key] || @key %></label>
+<textarea id="<%- @action_key.action_id %>_<%- @action_key.id %>_<%- @key %>" name="seo_field[<%- @key %>]"><%- @field %></textarea>

@@ -1,0 +1,22 @@
+pt-BR:
+  phaseout:
+    fields:
+      page_title:       'Título da Página'
+      meta_description: 'Meta Descrição'
+      meta_keywords:    'Meta Palavras Chave'
+      og_url:           'Facebook URL'
+      og_title:         'Facebook Título'
+      og_image:         'Facebook Imagem'
+      og_description:   'Facebook Descrição'
+      other:            'Outro'
+en:
+  phaseout:
+    fields:
+      page_title:       'Page Title'
+      meta_description: 'Meta Description'
+      meta_keywords:    'Meta Keywords'
+      og_url:           'Facebook URL'
+      og_title:         'Facebook Title'
+      og_image:         'Facebook Image'
+      og_description:   'Facebook Description'
+      other:            'Other'

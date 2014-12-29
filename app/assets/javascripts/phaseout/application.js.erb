@@ -18,10 +18,12 @@ function seo_action_list_path(){
   return "<%= Phaseout::Engine.routes.url_helpers.seo_action_list_path %>";
 }
 
+var PhaseoutFields = <%= Hash[ Phaseout.default_fields.map{ |field| [field, I18n.t( "phaseout.fields.#{field}" )] } ].to_json %>;
+
 function click_on_action_key_handler(action_key){
-  var action_key_html_id = action_key['action_id']+'_'+action_key['id'];
+  var action_key_html_id = [action_key['action_id'], action_key['id']].join('_');
   var item               = $('#'+action_key_html_id);
-  var fields_form        = $('#'+action_key_html_id+' .action_key_fields');
+  var fields_form        = item.children('.action_key_fields');
 
   $('#'+action_key_html_id+' .seo_action_key_link').click((function(){
     return function(){
@@ -35,6 +37,24 @@ function click_on_action_key_handler(action_key){
     fields_form[0].action_key = response_data;
     alert(response_data['status']);
   });
+
+  $('#'+action_key_html_id+'_button').click(function(){
+    var field_key = $('#'+action_key_html_id+' option:selected').attr('value');
+    if( field_key == 'other' ){
+      field_key = window.prompt('Add other field:');
+    }
+
+    if( $('#'+action_key_html_id+'_'+field_key).length > 0 ){
+      alert('Field already added');
+    } else {
+      var template_data = {
+        key:        field_key,
+        field:      '',
+        action_key: fields_form[0].action_key
+      }
+      fields_form.children('.seo_form_fields_list').append( JST['phaseout/templates/action_key_field'](template_data) );
+    }
+  })
 }
 
 function load_action_keys(key, html_id){

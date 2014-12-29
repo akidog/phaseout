@@ -2,7 +2,10 @@ module Phaseout
   class PhaseoutController < ::Phaseout::ApplicationController
 
     def update
-      render json: { status: :ok }.to_json
+      @seo_fields = Phaseout::SEOFields.find params[:key]
+      @seo_fields.values = params[:seo_field].to_h.symbolize_keys
+      @seo_fields.save
+      render json: @seo_fields.to_json
     end
 
     def actions
