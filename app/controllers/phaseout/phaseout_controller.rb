@@ -3,8 +3,10 @@ module Phaseout
 
     def update
       @seo_fields = Phaseout::SEOFields.find params[:key]
-      @seo_fields.values = params[:seo_field].to_h.symbolize_keys
-      @seo_fields.save
+      if @seo_fields
+        @seo_fields.values = params[:seo_field].to_h.symbolize_keys
+        @seo_fields.save
+      end
       render json: @seo_fields.to_json
     end
 
