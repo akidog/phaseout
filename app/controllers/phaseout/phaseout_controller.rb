@@ -6,8 +6,10 @@ module Phaseout
       if @seo_fields
         @seo_fields.values = params[:seo_field].to_h.symbolize_keys
         @seo_fields.save
+        render json: @seo_fields.to_json
+      else
+        not_found
       end
-      render json: @seo_fields.to_json
     end
 
     def actions
@@ -49,6 +51,10 @@ module Phaseout
 
       response.stream.write ']'
       response.stream.close
+    end
+
+    def not_found(data = { status: :not_found })
+      render json: data.to_json, status: 404
     end
 
   end
