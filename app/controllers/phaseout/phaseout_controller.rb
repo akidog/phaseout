@@ -12,6 +12,16 @@ module Phaseout
       end
     end
 
+    def delete
+      @seo_fields = Phaseout::SEOFields.find params[:key]
+      if @seo_fields
+        @seo_fields.delete
+        render json: { status: :ok }.to_json
+      else
+        not_found
+      end
+    end
+
     def actions
       streamed_json_response do |stream|
         ::Phaseout::SEOAction.all do |seo_action|
