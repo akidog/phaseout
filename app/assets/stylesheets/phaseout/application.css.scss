@@ -53,7 +53,24 @@ h1 {
 }
 
 .seo_action_key_item {
-  margin: 5px 35px;
+  margin:   5px 35px;
+  position: relative;
+
+  .seo_action_key_delete {
+    top:             3px;
+    right:           20px;
+    position:        absolute;
+    color:           #330000;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:hover + .seo_action_key_link {
+      background: #AACCAA;
+    }
+  }
 
   .seo_action_key_link {
     padding:         3px 5px;
@@ -78,6 +95,19 @@ h1 {
         color:      #FFDDAA;
         background: #AA6633;
       }
+    }
+
+    .seo_action_key_delete {
+      color: #331100;
+    }
+
+    .seo_action_key_delete:hover {
+      color: #FFDDAA;
+
+      & + .seo_action_key_link {
+       color:      #FFDDAA;
+       background: #AA6633;
+     }
     }
   }
 
