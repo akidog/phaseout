@@ -112,6 +112,7 @@ h1 {
   }
 
   .seo_fields_buttons {
+    margin:  15px 0px 0px 0px;
     padding:  0px 20px 10px;
     display:  block;
     position: relative;
@@ -127,10 +128,6 @@ h1 {
   margin:     0px 20px 0px -20px;
   list-style: none;
 
-  li {
-    margin: 15px 0px;
-  }
-
   label {
     display: block;
   }
@@ -141,7 +138,9 @@ h1 {
   }
 
   .seo_field_item {
+    margin:   15px 0px 0px 0px;
     position: relative;
+
     .delete_field {
       top:      0px;
       right:    0px;
