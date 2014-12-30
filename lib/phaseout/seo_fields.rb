@@ -46,6 +46,11 @@ module Phaseout
       Phaseout.redis.set key, self.dump
     end
 
+    def delete
+      Phaseout::SEOAction.find(action_key).remove key
+      Phaseout.redis.del key
+    end
+
     def evaluated_values(controller)
       @_values ||= if @default
         @default.evaluated_values(controller).merge @values

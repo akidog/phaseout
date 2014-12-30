@@ -30,6 +30,14 @@ module Phaseout
       controller.camelize.constantize.seo_group_name[key] || key
     end
 
+    def add(field_key)
+      Phaseout.redis.sadd key, field_key
+    end
+
+    def remove(field_key)
+      Phaseout.redis.srem key, field_key
+    end
+
     def to_json
       {
         id:         id,
@@ -38,6 +46,10 @@ module Phaseout
         action:     action,
         controller: controller
       }.to_json
+    end
+
+    def self.find(key)
+      self.new "action:#{key}"
     end
 
     def self.all(&block)

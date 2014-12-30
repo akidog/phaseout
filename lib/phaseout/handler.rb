@@ -45,8 +45,8 @@ module Phaseout
 
     protected
     def set_blank_field
-      Phaseout.redis.sadd class_index_key, key
-      Phaseout.redis.set  key, Phaseout::SEOFields.new(key, as).dump
+      Phaseout::SEOAction.new(class_index_key).add key
+      Phaseout::SEOFields.new(key, as).save
     end
 
     def eval_pattern(pattern)
