@@ -14,6 +14,11 @@ function seo_fields_update_path(key){
   return path.replace( 'PHASEOUT_ACTION_KEY', key.replace('#', '\%23') );
 }
 
+function seo_fields_delete_path(key){
+  var path = "<%= Phaseout::Engine.routes.url_helpers.seo_fields_delete_path('PHASEOUT_ACTION_KEY') %>";
+  return path.replace( 'PHASEOUT_ACTION_KEY', key.replace('#', '\%23') );
+}
+
 function seo_action_list_path(){
   return "<%= Phaseout::Engine.routes.url_helpers.seo_action_list_path %>";
 }
@@ -21,7 +26,8 @@ function seo_action_list_path(){
 var PhaseoutTranslations = <%= I18n.t('seo').to_json %>;
 var PhaseoutFields       = <%= Hash[ Phaseout.default_fields.map{ |field| [field, I18n.t( "seo.fields.#{field}" )] } ].to_json %>;
 
-function click_on_action_key_handler(action_key){
+function click_on_action_key_handler(_action_key){
+  var action_key         = _action_key;
   var action_key_html_id = [action_key['action_id'], action_key['id']].join('_');
   var item               = $('#'+action_key_html_id);
   var fields_form        = item.children('.action_key_fields');
@@ -36,6 +42,13 @@ function click_on_action_key_handler(action_key){
   fields_form[0].action_key = action_key;
   fields_form.on('ajax:success', function(xhr, response_data, status){
     fields_form[0].action_key = response_data;
+  });
+
+  $('#'+action_key_html_id+'_delete').on('ajax:success', function(xhr, response_data, status){
+    $('#'+action_key_html_id).remove();
+    if( $('#'+action_key['action_id']+' .action_key_list li').length == 0 ){
+      $('#'+action_key['action_id']).remove();
+    }
   });
 
   $('#'+action_key_html_id+'_button').click(function(){

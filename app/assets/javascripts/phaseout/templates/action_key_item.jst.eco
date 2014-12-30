@@ -1,6 +1,7 @@
 <li id="<%- @action_id %>_<%- @id %>" class="seo_action_key_item">
   <a href="javascript:void(0)" class="seo_action_key_link"><%- @name %></a>
-  <form action="<%- seo_fields_update_path @key %>" class="action_key_fields" style="display: none" data-remote="true">
+  <a id="<%- @action_id %>_<%- @id %>_delete" href="<%- seo_fields_delete_path @key %>" data-method="delete" data-remote="true"><%- @name %></a>
+  <form action="<%- seo_fields_update_path @key %>" class="action_key_fields" style="display: none" data-method="put" data-remote="true">
     <ul class="seo_form_fields_list">
       <% for key, field of @fields: %>
         <%- JST['phaseout/templates/action_key_field'](action_key: this, key: key, field: field) %>
