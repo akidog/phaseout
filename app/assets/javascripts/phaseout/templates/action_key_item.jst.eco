@@ -1,7 +1,8 @@
 <li id="<%- @action_id %>_<%- @id %>" class="seo_action_key_item">
   <a id="<%- @action_id %>_<%- @id %>_delete" href="<%- seo_fields_delete_path @key %>" class="seo_action_key_delete" data-method="delete" data-remote="true"><%- PhaseoutTranslations.common.delete %> [X]</a>
   <a id="<%- @action_id %>_<%- @id %>_link" href="javascript:void(0)" class="seo_action_key_link"><%- @name %></a>
-  <form action="<%- seo_fields_update_path @key %>" class="action_key_fields" style="display: none" data-method="put" data-remote="true">
+  <form action="<%- seo_fields_update_path @key %>" class="action_key_fields" style="display: none" method="post" data-remote="true">
+    <input name='_method' type='hidden' value='put'/>
     <ul class="seo_form_fields_list">
       <% for key, field of @fields: %>
         <%- JST['phaseout/templates/action_key_field'](action_key: this, key: key, field: field) %>
