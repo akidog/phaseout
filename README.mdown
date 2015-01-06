@@ -35,7 +35,7 @@ Maybe it will be something like that on controllers:
 
 ```ruby
 seo_tags_for :show, key: 'product/:@product.slug', as: 'Product @product.humanized_full_name' do |seo|
-  seo.meta_keywords{ |c| c.some_method_from_controller }
+  seo.meta_keywords{ some_method_from_controller }
   seo.og_url "raw_og_url"
   seo.any_helper "with it's", "arguments"
 end
