@@ -58,7 +58,7 @@ module Phaseout
         Hash[
           @values.map do |helper, argument|
             if argument.is_a? Proc
-              [ helper, argument.call(controller) ]
+              [ helper, controller.instance_eval(&argument) ]
             else
               [ helper, argument ]
             end
