@@ -10,8 +10,23 @@ module Phaseout
       @_seo_tags = value
     end
 
+    class Base
+      def initialize(controller)
+        @controller = controller
+      end
+
+      def seo_tags_for(*args, &block)
+        @controller.seo_tags_for *args, &block
+      end
+    end
+
     included do
       helper_method :seo_tags
+      begin
+        ( seo_class_name = "#{self.name}SEO" ).constantize.new(self).call
+      rescue NameError
+        raise "#{seo_class_name} not defined"
+      end
     end
 
     module ClassMethods
