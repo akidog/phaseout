@@ -10,9 +10,13 @@ module Phaseout
     end
 
     def to_html(controller)
-      evaluated_values(controller).map do |helper, argument|
+      values = evaluated_values(controller).map do |helper, argument|
         controller.view_context.send helper, *argument
-      end.join.html_safe
+      end
+
+      values << controller.view_context.og_auto_default
+
+      values.compact.join.html_safe
     end
 
     def action_key

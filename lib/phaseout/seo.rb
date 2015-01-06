@@ -2,6 +2,10 @@ module Phaseout
   module SEO
     extend ActiveSupport::Concern
 
+    def seo_context
+      @_seo_context ||= Hash.new
+    end
+
     def seo_tags
       @_seo_tags || ''
     end

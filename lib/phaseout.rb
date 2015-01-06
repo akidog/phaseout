@@ -19,7 +19,7 @@ module Phaseout
   end
 
   def self.default_fields
-    @default_fields ||= ::Phaseout::SEOHelper.instance_methods + [:other]
+    @default_fields ||= I18n.t('seo.fields').keys
   end
 end
 
