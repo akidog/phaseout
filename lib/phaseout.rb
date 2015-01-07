@@ -9,6 +9,8 @@ require 'phaseout/seo_helper'
 require 'phaseout/seo'
 require 'phaseout/handler'
 
+require 'phaseout/routes_tree'
+
 module Phaseout
   def self.config_redis(connection, namespace = :phaseout)
     @redis = Redis::Namespace.new namespace, redis: connection
