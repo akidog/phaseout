@@ -51,6 +51,9 @@ module Phaseout
   def self.title_tree_source
     TitleTreeGenerator.new(route_tree).call
   end
+
+  def self.title_builder
+  end
 end
 
 ActiveSupport.on_load(:action_view){ include Phaseout::SEOHelper }
