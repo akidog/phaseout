@@ -1,0 +1,9 @@
+Description:
+    generates config files for Phaseout gem
+
+Example:
+    rails generate phaseout
+
+    This will create:
+        config/initializer/phaseout_title_builder.rb
+        config/locales/phaseout.yml
