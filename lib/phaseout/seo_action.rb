@@ -59,8 +59,7 @@ module Phaseout
         return values
       end
 
-      pattern = "#{Phaseout.redis.namespace}:action:*"
-      Phaseout.redis.scan_each(match: pattern) do |value|
+      Phaseout.redis.scan_each(match: ':action:*') do |value|
         yield self.new( value.match(/#{ Phaseout.redis.namespace }\:action\:/).post_match )
       end
     end

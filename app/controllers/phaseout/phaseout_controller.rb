@@ -23,6 +23,7 @@ module Phaseout
     end
 
     def actions
+      binding.pry
       streamed_json_response do |stream|
         ::Phaseout::SEOAction.all do |seo_action|
           stream.call seo_action

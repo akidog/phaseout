@@ -112,7 +112,7 @@ module Phaseout
         return values
       end
 
-      class_index_key = "#{Phaseout.redis.namespace}:action:#{action_key}"
+      class_index_key = ":action:#{action_key}"
       Phaseout.redis.sscan_each(class_index_key) do |value|
         yield self.find value.match('seo_key:').post_match
       end

@@ -17,7 +17,7 @@ module Phaseout
   end
 
   def self.redis
-    @redis ||= Redis.new
+    @redis or raise "Vai a merda caralho!"
   end
 
   def self.default_fields
