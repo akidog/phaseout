@@ -29,13 +29,13 @@ module Phaseout
     def seo_fields
       return @seo_fields if @seo_fields
       dump = Phaseout.redis.get key
-      if dump.blank?
-        @blank_field = true
-        return nil
-      else
+      if dump && dump != ''
         @seo_fields = Marshal.load dump
         @seo_fields.default = @default
         @seo_fields
+      else
+        @blank_field = true
+        return nil
       end
     end
 
