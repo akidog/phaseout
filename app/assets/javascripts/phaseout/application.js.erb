@@ -42,6 +42,7 @@ function click_on_action_key_handler(_action_key){
   fields_form[0].action_key = action_key;
   fields_form.on('ajax:success', function(xhr, response_data, status){
     fields_form[0].action_key = response_data;
+    $('#'+action_key_html_id+' .seo_action_key_link').trigger('click');
   });
 
   $('#'+action_key_html_id+'_delete').on('ajax:success', function(xhr, response_data, status){
