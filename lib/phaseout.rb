@@ -12,12 +12,12 @@ require 'phaseout/handler'
 require 'phaseout/routes_tree'
 
 module Phaseout
-  def self.config_redis(connection, namespace = :phaseout)
-    @redis = Redis::Namespace.new namespace, redis: connection
+  def self.redis=(value)
+    @redis = value
   end
 
   def self.redis
-    @redis ||= config_redis(Redis.new)
+    @redis ||= Redis.new
   end
 
   def self.default_fields
