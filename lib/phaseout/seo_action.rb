@@ -59,8 +59,8 @@ module Phaseout
         return values
       end
 
-      Phaseout.redis.scan_each(match: ':action:*') do |value|
-        yield self.new( value.match(/#{ Phaseout.redis.namespace }\:action\:/).post_match )
+      Phaseout.redis.scan_each(match: 'action:*') do |value|
+        yield self.new( value.match(/action\:/).post_match )
       end
     end
   end
