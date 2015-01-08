@@ -17,7 +17,7 @@ module Phaseout
   end
 
   def self.redis
-    @redis or raise "Vai a merda caralho!"
+    @redis or raise "Missing Redis instance"
   end
 
   def self.default_fields
