@@ -38,14 +38,14 @@ module Phaseout
         @_seo_group_name ||= Hash.new
       end
 
-      def seo_tags_for(action, as: action, key: as, editable: true, grouped_as: nil, &block)
-        seo_action = Phaseout::SEOAction.new self.name, action
+      def seo_tags_for(main_action, actions: [ main_action ], as: main_action, key: as, editable: true, grouped_as: nil, &block)
+        seo_action = Phaseout::SEOAction.new self.name, main_action
         seo_group_name[seo_action.key] = grouped_as || seo_action.key
         around_block = lambda do |controller, action_block|
           return action_block.call unless request.format.html?
-          Phaseout::Handler.new(controller, action, as, key, editable, &block).call &action_block
+          Phaseout::Handler.new(controller, main_action, as, key, editable, &block).call &action_block
         end
-        around_action around_block, only: action
+        around_action around_block, only: actions
       end
     end
   end
