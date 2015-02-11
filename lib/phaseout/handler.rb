@@ -23,7 +23,7 @@ module Phaseout
     end
 
     def key
-      @key ||= I18n.transliterate( [ 'seo_key:', @controller.class.name, '#', @action, ':', eval_pattern(@key_pattern) ].join.gsub(/\s+/, '_').underscore )
+      @key ||= I18n.transliterate( [ 'seo_key:', @controller.class.name, '#', @action, ':', eval_pattern(@key_pattern) ].join.gsub(/\s+/, '_') ).underscore
     end
 
     def seo_fields
