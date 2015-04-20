@@ -26,6 +26,15 @@ module Phaseout
       end
     end
 
+    def reload
+      @fields = nil
+    end
+
+    def delete
+      fields.each &:delete
+      Phaseout.redis.del "action:#{key}"
+    end
+
     def name
       controller.camelize.constantize.seo_group_name[key] || key
     end
@@ -49,7 +58,7 @@ module Phaseout
     end
 
     def self.find(key)
-      self.new "action:#{key}"
+      self.new key
     end
 
     def self.all(&block)
