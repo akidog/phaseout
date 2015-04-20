@@ -33,7 +33,7 @@ module Phaseout
     def action_keys
       streamed_json_response do |stream|
         ::Phaseout::SEOFields.all(params[:key]) do |fields|
-          stream.call fields
+          stream.call(fields) if fields.present?
         end
       end
     end

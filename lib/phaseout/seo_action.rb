@@ -31,8 +31,8 @@ module Phaseout
     end
 
     def delete
-      fields.each &:delete
-      Phaseout.redis.del "action:#{key}"
+      fields.each{ |f| f.try :delete }
+      # Phaseout.redis.del "action:#{key}"
     end
 
     def name
@@ -44,7 +44,7 @@ module Phaseout
     end
 
     def remove(field_key)
-      Phaseout.redis.srem key, field_key
+      Phaseout.redis.srem "action:#{key}", field_key
     end
 
     def to_json
