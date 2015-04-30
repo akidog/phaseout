@@ -28,7 +28,7 @@ module Phaseout
     end
 
     def id
-      I18n.transliterate(@key.match(/\#.+\:/).post_match.gsub(/\s+/, '_')).underscore
+      I18n.transliterate(@key.match(/\#.+\:/).post_match.gsub(/\!+/, '').gsub(/\s+/, '_')).underscore
     end
 
     def to_json

@@ -11,11 +11,11 @@ module Phaseout
     end
 
     def key
-      I18n.transliterate([ @controller, @action ].join '#' ).gsub(/\s+/, '_').underscore
+      I18n.transliterate([ @controller, @action ].join '#' ).gsub(/\!+/, '').gsub(/\s+/, '_').underscore
     end
 
     def id
-      I18n.transliterate([ @controller, @action ].join '-' ).gsub(/\s+/, '_').underscore
+      I18n.transliterate([ @controller, @action ].join '-' ).gsub(/\!+/, '').gsub(/\s+/, '_').underscore
     end
 
     def fields(&block)
