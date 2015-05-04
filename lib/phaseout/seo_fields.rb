@@ -11,7 +11,11 @@ module Phaseout
 
     def to_html(controller)
       values = evaluated_values(controller).map do |helper, argument|
-        controller.view_context.send helper, *argument
+        begin
+          controller.view_context.send helper, *argument
+        rescue
+          argument
+        end
       end
 
       values << controller.view_context.og_auto_default
