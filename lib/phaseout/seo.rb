@@ -42,7 +42,7 @@ module Phaseout
         seo_action = Phaseout::SEOAction.new self.name, main_action
         seo_group_name[seo_action.key] = grouped_as || seo_action.key
         around_block = lambda do |controller, action_block|
-          return action_block.call unless request.format.html?
+          return action_block.call if request.format.html? == false
           Phaseout::Handler.new(controller, main_action, as, key, editable, &block).call &action_block
         end
         around_action around_block, only: actions
