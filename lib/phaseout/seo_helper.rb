@@ -14,6 +14,11 @@ module Phaseout
       tag 'meta', name: 'keywords', content: content
     end
 
+    def meta_robots(robots='robots', content)
+      controller.seo_context[:meta_robot] = content
+      tag 'meta', name: robots, content: content
+    end
+
     def link_canonical(url)
       controller.seo_context[:link_canonical] = url
       tag 'link', rel: 'canonical', href: url
