@@ -19,6 +19,7 @@ module Phaseout
       end
 
       values << controller.view_context.og_auto_default
+      values << controller.view_context.twitter_auto_default
 
       values.compact.join.html_safe
     end
