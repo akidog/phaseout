@@ -89,7 +89,7 @@ module Phaseout
       tag 'meta', property: 'twitter:image', content: content
     end
 
-    def twitter_auto_default(content)
+    def twitter_auto_default
       tags = ''
       if controller.seo_context[:twitter_auto]
         tags += twitter_title(controller.seo_context[:page_title])             if controller.seo_context[:page_title] && !controller.seo_context[:defined_twitter_title]
