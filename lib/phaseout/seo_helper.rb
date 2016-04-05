@@ -38,6 +38,10 @@ module Phaseout
       tag 'meta', property: 'og:url', content: content
     end
 
+    def og_url(content)
+      tag 'meta', property: 'og:type', content: content
+    end
+
     def og_image(content)
       tag 'meta', property: 'og:image', content: content
     end
@@ -50,5 +54,45 @@ module Phaseout
       end
       tags
     end
+
+		def twitter_auto(value = true)
+      controller.seo_context[:twitter_auto] = !!value && value != 'false'
+      nil
+    end
+
+		def twitter_card(content)
+			tag 'meta', property: 'twitter:card', content: content
+		end
+
+		def twitter_site(content)
+			tag 'meta', property: 'twitter:site', content: content
+		end
+
+		def twitter_creator(content)
+			tag 'meta', property: 'twitter:creator', content: content
+		end
+
+		def twitter_title(content)
+			tag 'meta', property: 'twitter:title', content: content
+		end
+
+		def twitter_description(content)
+			tag 'meta', property: 'twitter:description', content: content
+		end
+
+		def twitter_image(content)
+			tag 'meta', property: 'twitter:image', content: content
+		end
+
+		def twitter_auto_default(content)
+      tags = ''
+      if controller.seo_context[:twitter_auto]
+        tags += twitter_title(controller.seo_context[:page_title])             if controller.seo_context[:page_title] && !controller.seo_context[:defined_twitter_title]
+        tags += twitter_description(controller.seo_context[:meta_description]) if controller.seo_context[:meta_description] && !controller.seo_context[:defined_twitter_description]
+      end
+      tags
+		end
+
+
   end
 end
