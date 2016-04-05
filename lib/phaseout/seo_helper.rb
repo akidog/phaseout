@@ -14,6 +14,11 @@ module Phaseout
       tag 'meta', name: 'keywords', content: content
     end
 
+    def link_canonical(url)
+      controller.seo_context[:link_canonical] = url
+      tag 'link', rel: 'canonical', href: url
+    end
+
     def og_auto(value = true)
       controller.seo_context[:og_auto] = !!value && value != 'false'
       nil
