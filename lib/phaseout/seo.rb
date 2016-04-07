@@ -45,7 +45,7 @@ module Phaseout
           return action_block.call if request.format.html? == false
           Phaseout::Handler.new(controller, main_action, as, key, editable, &block).call &action_block
         end
-        around_action around_block, only: actions
+        append_around_action around_block, only: actions
       end
     end
   end
